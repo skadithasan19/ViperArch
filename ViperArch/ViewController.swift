@@ -8,8 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, VIewCountView {
 
+    var presenter:ViewPresenter?
+    
+    @IBOutlet weak var counterText: UILabel!
+    
+    @IBOutlet weak var decrementButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -19,7 +25,22 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func setViewCountText(text: String) {
+        self.counterText.text = text
+    }
 
+    func setDecrementEnabled(enabled: Bool) {
+        self.decrementButton.isEnabled = enabled
+    }
 
+    @IBAction func minus(_ sender: Any) {
+        self.presenter?.decrementNumber()
+    }
+    
+    @IBAction func plus(_ sender: Any) {
+        self.presenter?.incrementNumber()
+    }
 }
 
